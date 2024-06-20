@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--1.mapper内写增删改查操作;
+2.namespace用于解决命名冲突
+3.resultType记录要转换为的实体类型，注意sql语句中的字段必须和类属性同名-->
+<mapper namespace="com.njwb.zijin.dao.DeptMapper">
+     <select id="selectDeptById" resultType="com.njwb.zijin.entity.Dept">
+       select  id from dept where id=1
+     </select>
+
+    <select id="selectAllDept" resultType="com.njwb.zijin.entity.Dept">
+        select *  from dept
+    </select>
+<!--参数只有一个简单数值需要设置，直接写上值的数-->
+    <insert id="addDept" parameterType="int">
+        insert into dept (id) values (#{abc})
+    </insert>
+
+    <insert id="addDept1" parameterType="com.njwb.zijin.entity.Dept">
+        insert into dept (id,name,leader) values (#{id},#{name},#{leader})
+    </insert>
+<!--    参数有多个值，不能放在同一个类中，使用Map类型-->
+    <select id="selectEmp" resultType="com.njwb.zijin.entity.Emp" parameterType="java.util.Map">
+        select empid, name, zhiwei from Emp where name=#{name} and deptid=#{deptid}
+    </select>
+<!--#{}专门用于替换sql中的占位符？只能是值 -->
+<!--    ${}专门用于替换字符串，有sql注入风险-->
+    <select id="test" resultType="com.njwb.zijin.entity.Dept" parameterType="java.util.Map">
+        select id, ${a}, lea${b} from ${c} ${e} leader='${d}'
+    </select>
+
+
+</mapper>

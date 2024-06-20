@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 更新为新的MySQL JDBC驱动程序类 -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!-- 更新连接字符串，包括服务器时区和SSL配置 -->
+                <property name="url" value="jdbc:mysql://localhost:3306/springboot_test?useSSL=false&amp;serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="Admin123"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- sql映射文件 -->
+    <mappers>
+        <mapper resource="com/njwb/zijin/dao/DeptMapper.xml"/>
+        <mapper class="com.njwb.zijin.dao.DeptMapper"/>
+        <package name="com.njwb.zijin.dao.*"/>
+    </mappers>
+</configuration>
